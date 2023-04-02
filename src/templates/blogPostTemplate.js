@@ -1,12 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { MDXProvider } from "@mdx-js/react"
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 export const query = graphql`
   query BlogPostBySlug($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+    mdx(fields: { slug: { eq: $slug } }) {
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
@@ -15,19 +16,19 @@ export const query = graphql`
   }
 `;
 
-const BlogPostTemplate = ({ data }) => {
-  const post = data.markdownRemark;
+const BlogPostTemplate = ({ data, children}) => {
+  const post = data.mdx;
 
   return (
     <Layout >
       <h1>{post.frontmatter.title}</h1>
       <p>{post.frontmatter.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <MDXProvider>{children}</MDXProvider>
     </Layout>
   );
 };
 
 export default BlogPostTemplate;
 
-export const Head = ({ data }) => <Seo title={data.markdownRemark.frontmatter.title} />;
+export const Head = ({ data }) => <Seo title={data.mdx.frontmatter.title} />;
 

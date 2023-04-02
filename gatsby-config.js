@@ -17,7 +17,22 @@ module.exports = {
         icon: 'src/images/icon.png'
       }
     },
-    'gatsby-plugin-mdx',
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 1200,
+            },
+          },
+          "gatsby-remark-prismjs",
+          'gatsby-transformer-remark'
+        ],
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
@@ -43,7 +58,6 @@ module.exports = {
         path: `${__dirname}/src/posts`
       }
     },
-    'gatsby-plugin-react-helmet',
-    'gatsby-transformer-remark'
+    'gatsby-plugin-react-helmet'
   ]
 };

@@ -6,7 +6,7 @@ import Seo from '../components/seo'
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           id
@@ -32,7 +32,7 @@ const IndexPage = ({ data }) => (
       />
 
     <h2>Blog Posts</h2>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
+    {data.allMdx.edges.map(({ node }) => (
       <div key={node.id}>
         <h3>
           <Link to={node.fields.slug}>{node.frontmatter.title}</Link>

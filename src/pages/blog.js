@@ -9,7 +9,7 @@ import Seo from '../components/seo'
 const BlogPage = ({data}) => {
   return (
     <Layout pageTitle="My Blog Posts">
-      {data.allMarkdownRemark.edges.map(({ node }) => (
+      {data.allMdx.edges.map(({ node }) => (
       <div key={node.id}>
         <h3>
           <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
@@ -24,7 +24,7 @@ const BlogPage = ({data}) => {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           id

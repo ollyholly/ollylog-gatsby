@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import styled, { createGlobalStyle } from 'styled-components';
-
 
 const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;600&display=swap');
@@ -25,6 +24,7 @@ const Menu = styled.nav`
   width: 100%;
   display: flex;
   direction: row;
+  align-items: center;
 `
 const MenuList = styled.ul`
   display: flex;
@@ -34,14 +34,24 @@ const MenuList = styled.ul`
 `
 
 const Layout = ({ pageTitle, children }) => {
+  const data = useStaticQuery(graphql`
+  query {
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}
+`)
+
   return (
     <>
     <GlobalStyles />
     <Container>
       <Menu>
-        <h1>Ollylog</h1>
+        <header><Link to="/">{data.site.siteMetadata.title}</Link></header>
         <MenuList>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
           <li><Link to="/about">About</Link></li>
         </MenuList>
       </Menu>

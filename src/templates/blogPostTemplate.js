@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 
 export const query = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -18,7 +19,7 @@ const BlogPostTemplate = ({ data }) => {
   const post = data.markdownRemark;
 
   return (
-    <Layout>
+    <Layout >
       <h1>{post.frontmatter.title}</h1>
       <p>{post.frontmatter.date}</p>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -28,5 +29,5 @@ const BlogPostTemplate = ({ data }) => {
 
 export default BlogPostTemplate;
 
-export const Head = () => <title>{`Ollylog – ${post.frontmatter.title}`}</title>;
+export const Head = ({ data }) => <Seo title={data.markdownRemark.frontmatter.title} />;
 

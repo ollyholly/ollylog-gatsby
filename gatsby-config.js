@@ -3,7 +3,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Ollylog-gatsby`,
+    title: `Ollylog`,
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [

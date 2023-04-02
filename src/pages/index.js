@@ -1,25 +1,7 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import Layout from '../components/layout'
 
-// export const query = graphql`
-//   query {
-//     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-//       edges {
-//         node {
-//           id
-//           frontmatter {
-//             title
-//             date(formatString: "MMMM DD, YYYY")
-//           }
-//           fields {
-//             slug
-//           }
-//           excerpt
-//         }
-//       }
-//     }
-//   }
-// `;
 export const query = graphql`
   query {
     allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
@@ -41,8 +23,8 @@ export const query = graphql`
 `;
 
 const IndexPage = ({ data }) => (
-  <div>
-    <h1>Blog Posts</h1>
+     <Layout pageTitle="Home Page">
+    <h2>Blog Posts</h2>
     {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.id}>
         <h3>
@@ -52,9 +34,9 @@ const IndexPage = ({ data }) => (
         <p>{node.excerpt}</p>
       </div>
     ))}
-  </div>
+    </Layout>
 );
 
 export default IndexPage;
 
-export const Head = () => <title>Home Page</title>;
+export const Head = () => <title>Olly Home Page</title>;
